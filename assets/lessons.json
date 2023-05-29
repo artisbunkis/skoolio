@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "title": "Math Lesson",
+      "user": "John Doe",
+      "rating": 4.5,
+      "price": 19.99,
+      "description": "Learn math concepts and problem-solving techniques.",
+      "imageUrl": "assets/images/lesson.jpg",
+      "subject": "Math"
+    },
+    {
+      "id": 2,
+      "title": "History Lesson",
+      "user": "Jane Smith",
+      "rating": 4.2,
+      "price": 14.99,
+      "description": "Explore the fascinating world of history.",
+      "imageUrl": "assets/images/lesson.jpg",
+      "subject": "History"
+    },
+    {
+      "id": 3,
+      "title": "English Lesson",
+      "user": "David Johnson",
+      "rating": 4.8,
+      "price": 24.99,
+      "description": "Improve your English language skills.",
+      "imageUrl": "assets/images/lesson.jpg",
+      "subject": "English"
+    },
+    {
+      "id": 4,
+      "title": "Science Lesson",
+      "user": "Emily Brown",
+      "rating": 4.6,
+      "price": 17.99,
+      "description": "Discover the wonders of science.",
+      "imageUrl": "assets/images/lesson.jpg",
+      "subject": "Science"
+    },
+    {
+      "id": 5,
+      "title": "Art Lesson",
+      "user": "Michael Wilson",
+      "rating": 4.4,
+      "price": 12.99,
+      "description": "Unleash your creativity with art.",
+      "imageUrl": "assets/images/lesson.jpg",
+      "subject": "Art"
+    },
+    {
+      "id": 6,
+      "title": "Music Lesson",
+      "user": "Sophia Davis",
+      "rating": 4.7,
+      "price": 21.99,
+      "description": "Learn to play musical instruments.",
+      "imageUrl": "assets/images/lesson.jpg",
+      "subject": "Music"
+    }
+  ]
+  
