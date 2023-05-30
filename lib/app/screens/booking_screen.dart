@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:skoolio/app/models/lesson_model.dart';
+import 'package:skoolio/app/screens/lesson_screen.dart';
 import 'package:skoolio/app/services/firestore_service.dart';
+import 'package:skoolio/app/widgets/user_lesson_list_view.dart';
 
 class BookingScreen extends StatefulWidget {
   @override
@@ -21,17 +23,7 @@ class _BookingScreenState extends State<BookingScreen> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Lesson> lessons = snapshot.data!;
-            return ListView.builder(
-              itemCount: lessons.length,
-              itemBuilder: (context, index) {
-                Lesson lesson = lessons[index];
-                return ListTile(
-                  title: Text(lesson.title),
-                  subtitle: Text('By ${lesson.user}'),
-                  // Other details of the lesson
-                );
-              },
-            );
+            return UserLessonListView(lessons: lessons);
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {

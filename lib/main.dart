@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skoolio/app/screens/auth/sign_in_screen.dart';
 import 'package:skoolio/app/screens/home_screen.dart';
 import 'package:skoolio/app/screens/booking_screen.dart';
+import 'package:skoolio/app/screens/my_bookings_screen.dart';
 import 'package:skoolio/app/screens/profile_screen.dart';
 
 void main() async {
@@ -73,6 +74,7 @@ class _MainNavigationState extends State<MainNavigation> {
   final List<Widget> _screens = [
     HomeScreen(),
     BookingScreen(),
+    MyBookingsScreen(),
     ProfileScreen(),
   ];
 
@@ -99,6 +101,10 @@ class _MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.contacts),
             label: 'Lessons',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book_online),
+            label: 'My Bookings',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
