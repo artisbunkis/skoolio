@@ -1,10 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:skoolio/app/services/auth_service.dart';
+import 'package:skoolio/app/screens/home_screen.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final AuthService _authService = AuthService();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signUpWithEmailAndPassword() async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        final String email = _emailController.text.trim();
+        final String password = _passwordController.text.trim();
+
+        await _authService.signUpWithEmailAndPassword(email, password);
+
+        // Navigate to the home screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
+      }
+    } catch (e) {
+      // Handle sign-up errors
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,29 +47,45 @@ class SignUpScreen extends StatelessWidget {
         title: Text('Sign Up'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              child: Text('Sign Up'),
-              onPressed: () async {
-                await _authService.signUpWithEmail(
-                  _emailController.text,
-                  _passwordController.text,
-                );
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
-          ],
+        padding: EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: _signUpWithEmailAndPassword,
+                child: Text('Sign Up'),
+              ),
+            ],
+          ),
         ),
       ),
     );
