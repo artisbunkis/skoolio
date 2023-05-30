@@ -1,5 +1,4 @@
 class Lesson {
-  final int id;
   final String title;
   final String user;
   final double rating;
@@ -9,7 +8,6 @@ class Lesson {
   final String subject;
 
   Lesson({
-    required this.id,
     required this.title,
     required this.user,
     required this.rating,
@@ -19,7 +17,7 @@ class Lesson {
     required this.subject,
   });
 
-  factory Lesson.fromJson(Map<String, dynamic> json) {
+  /*factory Lesson.fromJson(Map<String, dynamic> json) {
     return Lesson(
       id: json['id'],
       title: json['title'],
@@ -30,5 +28,5 @@ class Lesson {
       imageUrl: json['imageUrl'],
       subject: json['subject'],
     );
-  }
+  }*/
 }

@@ -40,4 +40,9 @@ class AuthService {
   Stream<User?> authStateChanges() {
     return _auth.authStateChanges();
   }
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  Future<User?> getCurrentUser() async {
+    return _firebaseAuth.currentUser;
+  }
 }

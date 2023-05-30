@@ -2,32 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:skoolio/app/models/lesson_model.dart';
 import 'package:skoolio/app/screens/add_lesson_screen.dart';
 import 'package:skoolio/app/screens/lesson_screen.dart';
+import 'package:skoolio/app/services/firestore_service.dart';
 import 'package:skoolio/app/widgets/lesson_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Lesson> lessons = [
-    Lesson(
-      id: 1,
-      title: "Math Lesson",
-      user: "John Doe",
-      rating: 4.5,
-      price: 19.99,
-      description: "Learn math concepts and problem-solving techniques.",
-      imageUrl: "assets/images/lesson.jpg",
-      subject: "Math",
-    ),
-    Lesson(
-      id: 2,
-      title: "History Lesson",
-      user: "Jane Smith",
-      rating: 4.2,
-      price: 14.99,
-      description: "Explore the fascinating world of history.",
-      imageUrl: "assets/images/lesson.jpg",
-      subject: "History",
-    ),
-    // Add more lessons here
-  ];
+  final FirestoreService _firestoreService = FirestoreService();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +26,18 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(height: 16.0),
           Expanded(
-            child: LessonListView(lessons: lessons),
+            child: StreamBuilder<List<Lesson>>(
+              stream: _firestoreService.getLessonsFromFirestore(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return LessonListView(lessons: snapshot.data!);
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
           ),
         ],
       ),
